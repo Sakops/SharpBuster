@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "Movie Page";
+}
+
+@if(TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <h2>Movie Database</h2>
+    </div>
+    
+</div>
+
+<div class="container p-3 text-center">    
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Movie Name
+                </th>
+                <th>
+                    Movie Director
+                </th>
+                <th>
+                    Release Date
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="30%">
+                        @obj.Name
+                    </td>
+                     <td width="30%">
+                        @obj.Director
+                    </td>
+                    <td width="30%">
+                        @obj.ReleaseDate
+                    </td>
+                    <td>
+                        <div class="w-70 btn-group">
+                            <a class="btn btn-warning" asp-controller="Movie" asp-action="Edit" asp-route-id="@obj.Id"><i class="bi bi-pen-fill"></i>Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="w-60 btn-group">
+                            <a class="btn btn-danger" asp-controller="Movie" asp-action="Delete" asp-route-id="@obj.Id">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary" asp-action="Create" asp-controller="Movie">Add Movie</a>
+    
+</div>
